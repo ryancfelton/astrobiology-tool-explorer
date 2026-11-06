@@ -2,6 +2,7 @@ const catalog=window.ASTROBIOLOGY_TOOLS||[];
 const category=document.body.dataset.category;
 const params=new URLSearchParams(window.location.search);
 const isKeywordPage=document.body.dataset.page==="keyword";
+const isAllToolsPage=document.body.dataset.page==="all-tools";
 const keyword=isKeywordPage?(params.get("keyword")||"").trim():"";
 const sourceId=isKeywordPage?params.get("from"):null;
 const normalize=value=>value.trim().toLowerCase();
@@ -11,7 +12,7 @@ function node(tag,text,cls){const el=document.createElement(tag);if(text)el.text
 function link(text,url){const a=node("a",text);a.href=url;return a}
 function render(){
  const query=input.value.trim().toLowerCase();
- section.hidden=!isKeywordPage&&!category&&!query;results.replaceChildren();
+ section.hidden=!isAllToolsPage&&!isKeywordPage&&!category&&!query;results.replaceChildren();
  const matches=catalog.filter(t=>(!category||t.category===category)&&(!isKeywordPage||(keyword&&t.keywords.some(k=>normalize(k)===normalize(keyword))))&&[t.name,t.summary,names[t.category],...t.keywords,...t.publications.map(p=>p.title)].join(" ").toLowerCase().includes(query));
  if(isKeywordPage)matches.sort((a,b)=>Number(b.id===sourceId)-Number(a.id===sourceId));
  count.textContent=matches.length?matches.length+" tool"+(matches.length===1?"":"s")+" found":isKeywordPage?"No tools currently match this keyword"+(query?" and search.":"."):"No tools found. Try another search.";

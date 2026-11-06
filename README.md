@@ -5,11 +5,12 @@ Live site: https://ryancfelton.github.io/astrobiology-tool-explorer/
 Double-click preview.command to open http://localhost:4173. Refresh after editing.
 You can also open index.html directly.
 
-The home page searches all tools and links to four category pages:
+The home page searches all tools and links to five browsing options:
 - exoplanet-detection.html
 - biosignatures.html
 - atmosphere-characterization.html
 - language-models.html
+- all-tools.html (full searchable catalog)
 
 Edit tools.js to curate the catalog. Each entry contains a science category, summary, AI/ML keywords, image and alt text, repository URL, and author publication links.
 The catalog includes ExoMiner, ASTRAFier, the molecular biosignature classifier, HELA, TelescopeML, and INDUS-SDE. Add more entries using the same fields.

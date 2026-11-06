@@ -11,7 +11,7 @@ const input=document.querySelector("#search"),results=document.querySelector("#r
 function node(tag,text,cls){const el=document.createElement(tag);if(text)el.textContent=text;if(cls)el.className=cls;return el}
 function link(text,url){const a=node("a",text);a.href=url;return a}
 function render(){
- const query=input.value.trim().toLowerCase();
+ const query=input?input.value.trim().toLowerCase():"";
  section.hidden=!isAllToolsPage&&!isKeywordPage&&!category&&!query;results.replaceChildren();
  const matches=catalog.filter(t=>(!category||t.category===category)&&(!isKeywordPage||(keyword&&t.keywords.some(k=>normalize(k)===normalize(keyword))))&&[t.name,t.summary,names[t.category],...t.keywords,...t.publications.map(p=>p.title)].join(" ").toLowerCase().includes(query));
  if(isKeywordPage)matches.sort((a,b)=>Number(b.id===sourceId)-Number(a.id===sourceId));
@@ -33,9 +33,9 @@ function render(){
   article.append(figure,content);results.append(article);
  });
 }
-input.addEventListener("input",render);
-document.querySelector("form").addEventListener("submit",e=>e.preventDefault());
-document.querySelector("form").addEventListener("reset",()=>{input.value="";render();input.focus()});
+input?.addEventListener("input",render);
+document.querySelector("form")?.addEventListener("submit",e=>e.preventDefault());
+document.querySelector("form")?.addEventListener("reset",()=>{input.value="";render();input.focus()});
 if(isKeywordPage){
  document.querySelector("h1").textContent=keyword?"Tools using "+keyword:"Browse tools by keyword";
  document.title=keyword?keyword+" | Astrobiology Tool Explorer":"Keywords | Astrobiology Tool Explorer";
